@@ -52,9 +52,13 @@ for index, row in df.iterrows():
 for index, row in df.iterrows():
     df.loc[index, "When"] = start_time_to_float(df.loc[index, "When"])
 
-df.head()
-
 for index, row in df.iterrows():
     df.loc[index, "How_Much"] = get_price(str(df.loc[index, "How_Much"]))
-    
-df.head()
+
+new_file = df[df["When"],df["How_Much"]]
+# save new file with parsed date and price
+new_file.to_csv("newFile.csv", index=False)
+
+#check if data been parsed
+f = pd.read_csv("newFile.csv")
+f.head()
